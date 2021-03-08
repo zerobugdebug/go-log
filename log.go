@@ -222,20 +222,8 @@ func (l *Logger) Output(depth int, prefix Prefix, data string) error {
 		if l.color {
 			l.buf.Blue()
 		}
-		// Print date and time
-		year, month, day := now.Date()
-		l.buf.AppendInt(year, 4)
-		l.buf.AppendByte('/')
-		l.buf.AppendInt(int(month), 2)
-		l.buf.AppendByte('/')
-		l.buf.AppendInt(day, 2)
-		l.buf.AppendByte(' ')
-		hour, min, sec := now.Clock()
-		l.buf.AppendInt(hour, 2)
-		l.buf.AppendByte(':')
-		l.buf.AppendInt(min, 2)
-		l.buf.AppendByte(':')
-		l.buf.AppendInt(sec, 2)
+		// Print datetime stamp
+		l.buf.Append([]byte(now.Format("2006/01/02 15:04:05.000")))
 		l.buf.AppendByte(' ')
 		// Print reset color if color enabled
 		if l.color {
